@@ -11,7 +11,7 @@ describe Schedule::TimetablesPresenter do
 
     let(:scheduled_massages) do
       Massage
-        .where("date(timetable) = ?", 1.day.from_now.to_date)
+        .where('date(timetable) = ?', 1.day.from_now.to_date)
         .group(:timetable).count(:id)
     end
 

@@ -8,10 +8,10 @@ class Massage < ActiveRecord::Base
 
   validates(
     :timetable,
-    timetable: true,
-    uniqueness: { scope: [:user_id, :date] },
+    timetable:                      true,
+    uniqueness:                     { scope: [:user_id, :date] },
     timetable_week_year_uniqueness: true,
-    on: :create
+    on:                             :create
   )
 
   scope :scheduled_massages, -> { where(status: 'scheduled') }

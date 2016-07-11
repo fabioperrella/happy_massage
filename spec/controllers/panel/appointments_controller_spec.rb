@@ -3,9 +3,9 @@ describe Panel::AppointmentsController do
   let(:cas_extra_attributes) do
     {
       'authorities' => ['MASSAGE_ADMIN-N3'],
-      'cn' => 'Jackie Chan',
-      'email' => 'jackie.chan@gmail.com',
-      'type' => 'Employee'
+      'cn'          => 'Jackie Chan',
+      'email'       => 'jackie.chan@gmail.com',
+      'type'        => 'Employee'
     }
   end
 
@@ -27,7 +27,7 @@ describe Panel::AppointmentsController do
     let(:timetable) { '2015-08-05 9:00' }
     let(:params) do
       {
-        user: user,
+        user:      user,
         timetable: timetable
       }
     end

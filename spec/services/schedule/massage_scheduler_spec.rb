@@ -9,7 +9,7 @@ describe Schedule::MassageScheduler do
     let(:args) do
       {
         timetable: timetable,
-        user: user
+        user:      user
       }
     end
 

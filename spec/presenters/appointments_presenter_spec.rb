@@ -9,8 +9,8 @@ describe AppointmentsPresenter do
     let!(:scheduled_massage) do
       create(
         :massage,
-        user: user,
-        location: 'lala',
+        user:      user,
+        location:  'lala',
         timetable: Time.zone.parse('2015-10-11 9:00')
       )
     end

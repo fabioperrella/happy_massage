@@ -17,7 +17,7 @@ module Schedule
     def scheduled_massages
       @schedule_massages ||= begin
         query = Massage.where('date(timetable) = ?', massage_date)
-                      .group(:timetable).count(:id)
+                .group(:timetable).count(:id)
         Hash[query.map { |key, value| [key.in_time_zone, value] }]
       end
     end

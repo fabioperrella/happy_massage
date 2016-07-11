@@ -3,9 +3,9 @@ describe Panel::BaseController do
   let(:cas_extra_attributes) do
     {
       'authorities' => ['MASSAGE_ADMIN-N3'],
-      'cn' => 'Jackie Chan',
-      'email' => 'jackie.chan@gmail.com',
-      'type' => type
+      'cn'          => 'Jackie Chan',
+      'email'       => 'jackie.chan@gmail.com',
+      'type'        => type
     }
   end
   let(:cas_client) { CASClient::Frameworks::Rails::Filter }

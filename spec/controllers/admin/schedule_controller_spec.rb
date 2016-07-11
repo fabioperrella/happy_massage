@@ -3,9 +3,9 @@ describe Admin::ScheduleController do
   let(:cas_extra_attributes) do
     {
       'authorities' => ['HAPPY_MASSAGE_ADMIN-N3'],
-      'cn' => 'Jackie Chan',
-      'email' => 'jackie.chan@gmail.com',
-      'type' => 'Employee'
+      'cn'          => 'Jackie Chan',
+      'email'       => 'jackie.chan@gmail.com',
+      'type'        => 'Employee'
     }
   end
 
@@ -54,7 +54,7 @@ describe Admin::ScheduleController do
   describe 'PUT #confirm_presence' do
     let(:params) do
       {
-        id: id,
+        id:     id,
         format: :js
       }
     end
@@ -91,7 +91,7 @@ describe Admin::ScheduleController do
   describe 'PUT #confirm_absence' do
     let(:params) do
       {
-        id: id,
+        id:     id,
         format: :js
       }
     end

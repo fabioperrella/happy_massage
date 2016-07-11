@@ -6,8 +6,8 @@ class AppointmentsPresenter
   def recent_appointments
     @recent_appointments ||= \
       user_massages
-        .scheduled_massages
-        .where('timetable > ?', interval_to_be_considered_recent)
+      .scheduled_massages
+      .where('timetable > ?', interval_to_be_considered_recent)
   end
 
   def past_appointments
