@@ -3,9 +3,9 @@ describe Panel::AppointmentsController do
   let(:cas_extra_attributes) do
     {
       'authorities' => ['MASSAGE_ADMIN-N3'],
-      'cn' => 'Jackie Chan',
-      'email' => 'jackie.chan@gmail.com',
-      'type' => 'Employee'
+      'cn'          => 'Jackie Chan',
+      'email'       => 'jackie.chan@gmail.com',
+      'type'        => 'Employee'
     }
   end
 
@@ -27,7 +27,7 @@ describe Panel::AppointmentsController do
     let(:timetable) { '2015-08-05 9:00' }
     let(:params) do
       {
-        user: user,
+        user:      user,
         timetable: timetable
       }
     end
@@ -47,7 +47,7 @@ describe Panel::AppointmentsController do
 
       it { expect(Massage.last).to_not be_nil }
       it { is_expected.to redirect_to root_path }
-      it { is_expected.to set_flash[:notice].to(successful_creation_message) }
+      it { expect(flash[:notice]).to eq(successful_creation_message) }
     end
 
     context 'when massage does not persist' do
@@ -60,7 +60,7 @@ describe Panel::AppointmentsController do
 
       it { expect(Massage.last).to be_nil }
       it { is_expected.to redirect_to root_path }
-      it { is_expected.to set_flash[:alert].to(error_message) }
+      it { expect(flash[:alert]).to eq(error_message) }
     end
   end
 
@@ -135,9 +135,7 @@ describe Panel::AppointmentsController do
       after { Timecop.return }
 
       it { is_expected.to redirect_to root_path }
-      it 'sets flash :notice with the correct message' do
-        is_expected.to set_flash[:notice].to(successfully_cancelled)
-      end
+      it { expect(flash[:notice]).to eq(successfully_cancelled) }
     end
 
     context 'when massage appointment can not be cancelled' do
@@ -154,9 +152,7 @@ describe Panel::AppointmentsController do
       after { Timecop.return }
 
       it { is_expected.to redirect_to root_path }
-      it 'sets flash :notice with the correct message' do
-        is_expected.to set_flash[:alert].to(cannot_be_cancelled)
-      end
+      it { expect(flash[:alert]).to eq(cannot_be_cancelled) }
     end
 
     context 'when massage appointment is not found' do
@@ -169,7 +165,7 @@ describe Panel::AppointmentsController do
       end
 
       it { is_expected.to redirect_to root_path }
-      it { is_expected.to set_flash[:alert].to(not_found_message) }
+      it { expect(flash[:alert]).to eq(not_found_message) }
     end
   end
 end

@@ -4,9 +4,9 @@ describe Panel::SessionsController do
     let(:cas_extra_attributes) do
       {
         'authorities' => ['HAPPY_MASSAGE_ADMIN-N3'],
-        'cn' => 'Jackie Chan',
-        'email' => 'jackie.chan@gmail.com',
-        'type' => 'Employee'
+        'cn'          => 'Jackie Chan',
+        'email'       => 'jackie.chan@gmail.com',
+        'type'        => 'Employee'
       }
     end
 

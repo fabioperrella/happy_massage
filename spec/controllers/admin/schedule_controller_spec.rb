@@ -3,9 +3,9 @@ describe Admin::ScheduleController do
   let(:cas_extra_attributes) do
     {
       'authorities' => ['HAPPY_MASSAGE_ADMIN-N3'],
-      'cn' => 'Jackie Chan',
-      'email' => 'jackie.chan@gmail.com',
-      'type' => 'Employee'
+      'cn'          => 'Jackie Chan',
+      'email'       => 'jackie.chan@gmail.com',
+      'type'        => 'Employee'
     }
   end
 
@@ -20,7 +20,7 @@ describe Admin::ScheduleController do
       before { get(:index) }
 
       it { expect(response).to have_http_status(:success) }
-      it { is_expected.to render_with_layout(:admin) }
+      it { is_expected.to render_template(layout: 'admin') }
       it { is_expected.to render_template(:index) }
       it { expect(assigns(:appointments)).to be_nil }
     end
@@ -30,7 +30,7 @@ describe Admin::ScheduleController do
         before { get(:index, date: '2015-01-01') }
 
         it { expect(response).to have_http_status(:success) }
-        it { is_expected.to render_with_layout(:admin) }
+        it { is_expected.to render_template(layout: 'admin') }
         it { is_expected.to render_template(:index) }
         it { expect(assigns(:appointments)).to be_empty }
       end
@@ -41,7 +41,7 @@ describe Admin::ScheduleController do
         before { get(:index, date: '2015-01-01') }
 
         it { expect(response).to have_http_status(:success) }
-        it { is_expected.to render_with_layout(:admin) }
+        it { is_expected.to render_template(layout: 'admin') }
         it { is_expected.to render_template(:index) }
 
         it 'assigns @appointments a non empty array' do
@@ -54,7 +54,7 @@ describe Admin::ScheduleController do
   describe 'PUT #confirm_presence' do
     let(:params) do
       {
-        id: id,
+        id:     id,
         format: :js
       }
     end
@@ -73,7 +73,7 @@ describe Admin::ScheduleController do
 
       before { put(:confirm_presence, params) }
 
-      it { is_expected.to set_flash[:alert].to(appointment_not_found) }
+      it { expect(flash[:alert]).to eq(appointment_not_found) }
       it { is_expected.to redirect_to admin_schedule_index_path }
     end
 
@@ -91,7 +91,7 @@ describe Admin::ScheduleController do
   describe 'PUT #confirm_absence' do
     let(:params) do
       {
-        id: id,
+        id:     id,
         format: :js
       }
     end
@@ -110,7 +110,7 @@ describe Admin::ScheduleController do
 
       before { put(:confirm_absence, params) }
 
-      it { is_expected.to set_flash[:alert].to(appointment_not_found) }
+      it { expect(flash[:alert]).to eq(appointment_not_found) }
       it { is_expected.to redirect_to admin_schedule_index_path }
     end
 

@@ -13,7 +13,7 @@ describe User do
         double(
           :user_session,
           login: 'jackie.chan',
-          name: 'Jackie Chan',
+          name:  'Jackie Chan',
           email: 'jackie.chan@lala.popo'
         )
       end
@@ -24,7 +24,7 @@ describe User do
         expect(User.last)
           .to have_attributes(
             login: 'jackie.chan',
-            name: 'Jackie Chan',
+            name:  'Jackie Chan',
             email: 'jackie.chan@lala.popo'
           )
       end
@@ -36,7 +36,7 @@ describe User do
         double(
           :user_session,
           login: user.login,
-          name: user.name,
+          name:  user.name,
           email: user.email
         )
       end

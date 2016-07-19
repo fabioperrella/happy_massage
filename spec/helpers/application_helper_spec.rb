@@ -9,9 +9,9 @@ describe ApplicationHelper do
     end
 
     {
-      'alert' => 'ls-alert-danger',
+      'alert'  => 'ls-alert-danger',
       'notice' => 'ls-alert-success',
-      'info' => 'ls-alert-info'
+      'info'   => 'ls-alert-info'
     }.each do |alert, css_class|
       context "when #{alert} can be dismissed" do
         let(:result) do
@@ -28,7 +28,7 @@ describe ApplicationHelper do
     end
 
     {
-      'warning' => 'ls-alert-warning',
+      'warning'               => 'ls-alert-warning',
       'alert_without_dismiss' => 'ls-alert-danger'
     }.each do |alert, css_class|
       context "when #{alert} cannot be dismissed" do

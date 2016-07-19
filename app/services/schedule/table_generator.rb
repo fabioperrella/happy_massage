@@ -48,7 +48,7 @@ module Schedule
     end
 
     # Refactor methods above using this
-    def generate_timetables(first, last, interval)
+    def generate_timetables(_first, _last, interval)
       (initial.to_i..final.to_i).step(interval).map { |t| Time.zone.at(t) }
     end
   end

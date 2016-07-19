@@ -20,9 +20,7 @@ module Panel
       end
     end
 
-    def current_user
-      @current_user
-    end
+    attr_reader :current_user
 
     private
 

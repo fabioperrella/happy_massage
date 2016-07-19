@@ -6,7 +6,7 @@ class TimetableValidator < ActiveModel::EachValidator
 
   private
 
-  def validate_schedule_is_open(record, attribute, value)
+  def validate_schedule_is_open(record, attribute, _value)
     return if schedule_is_open?
 
     record.errors.add(attribute, :schedule_is_not_open)

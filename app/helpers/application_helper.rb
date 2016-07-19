@@ -1,10 +1,10 @@
 module ApplicationHelper
   FLASH_TYPES = {
-    'warning' => 'ls-alert-warning',
-    'alert' => 'ls-alert-danger',
+    'warning'               => 'ls-alert-warning',
+    'alert'                 => 'ls-alert-danger',
     'alert_without_dismiss' => 'ls-alert-danger',
-    'notice' => 'ls-alert-success',
-    'info' => 'ls-alert-info'
+    'notice'                => 'ls-alert-success',
+    'info'                  => 'ls-alert-info'
   }
 
   def flash_message

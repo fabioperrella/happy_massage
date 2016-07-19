@@ -14,7 +14,7 @@ describe Admin::AppointmentsBookBuilder do
 
       context 'when there are 3 massages scheduled' do
         let(:appointments_grouped_by_massage) do
-          appointments.group_by { |timetable, masseur, massage| massage }
+          appointments.group_by { |_timetable, _masseur, massage| massage }
         end
 
         before do

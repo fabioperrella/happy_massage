@@ -11,8 +11,8 @@ describe Massage do
       subject(:massage) do
         described_class.new(
           timetable: timetable,
-          user: user,
-          masseur: masseur
+          user:      user,
+          masseur:   masseur
         )
       end
 

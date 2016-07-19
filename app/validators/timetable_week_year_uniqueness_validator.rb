@@ -1,5 +1,5 @@
 class TimetableWeekYearUniquenessValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, attribute, _value)
     return if record.user.nil? || record.timetable.nil?
 
     validate_week_year_uniqueness(record, attribute)

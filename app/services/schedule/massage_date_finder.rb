@@ -6,7 +6,7 @@ module Schedule
 
     def massage_date
       @massage_date ||= begin
-        return if !Schedule::Checker.new(@schedule_date).day_has_schedule?
+        return unless Schedule::Checker.new(@schedule_date).day_has_schedule?
 
         @schedule_date.advance(days: remaining_days_for_massage)
       end
