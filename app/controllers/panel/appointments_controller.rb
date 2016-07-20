@@ -16,10 +16,7 @@ module Panel
     end
 
     def new
-      return unless schedule_is_open
-
-      @massage_date = date_finder.massage_date
-      @available_timetables = available_timetables
+      @available_timetables = Schedule::TimetablesPresenter.new.available_schedule(Time.now)
       @massage = Massage.new
     end
 
@@ -36,20 +33,11 @@ module Panel
       redirect_to root_path
     end
 
+    def schedule
+      render :json => Schedule::TimetablesPresenter.new.available_schedule(Time.now)
+    end
+
     private
-
-    def schedule_is_open
-      @schedule_is_open ||= \
-        Schedule::Checker.new(Time.zone.now).schedule_is_open?
-    end
-
-    def date_finder
-      Schedule::MassageDateFinder.new(Time.zone.today)
-    end
-
-    def available_timetables
-      Schedule::TimetablesPresenter.new.available_timetables
-    end
 
     def schedule_massage
       Schedule::MassageScheduler.new(massage_params).schedule_massage

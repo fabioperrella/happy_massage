@@ -46,7 +46,9 @@ module Admin
     end
 
     def timetables
-      @timetables ||= Schedule::TableGenerator.new(date).schedule_table
+      start_time = date.to_time.at_beginning_of_day
+      end_time = date.to_time.at_end_of_day
+      @timetables ||= Schedule::TableGenerator.new.schedule_table(start_time, end_time)
     end
 
     def available_masseurs

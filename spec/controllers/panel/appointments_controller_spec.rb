@@ -168,4 +168,10 @@ describe Panel::AppointmentsController do
       it { expect(flash[:alert]).to eq(not_found_message) }
     end
   end
+
+  describe 'GET #open_schedule' do
+    before do
+      get(:open_schedule)
+    end
+  end
 end

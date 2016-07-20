@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get 'appointments' => 'appointments#index'
     post 'appointments' => 'appointments#create'
 
+    get 'appointments/schedule' => 'appointments#schedule'
+
     get 'appointments/new' => 'appointments#new'
     delete 'appointments/:id' => 'appointments#destroy'
 

@@ -1,9 +1,9 @@
 describe Schedule::TableGenerator do
   describe '#schedule_table' do
+
     subject(:schedule_table) do
-      described_class.new(massage_date).schedule_table
+      described_class.new.schedule_table
     end
-    let(:massage_date) { Time.zone.today }
 
     context 'when table is generated' do
       it { is_expected.to_not be_nil }

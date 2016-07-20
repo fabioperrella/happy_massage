@@ -18,25 +18,6 @@ describe TimetableValidator do
     end
     subject(:timetable_sample) { TimetableSample.new(timetable) }
 
-    context 'when schedule is not open' do
-      let(:timetable) { Time.zone.parse('2015-08-03 9:00') }
-      before do
-        allow_any_instance_of(Schedule::Checker)
-          .to receive(:schedule_is_open?)
-          .and_return(false)
-      end
-
-      it { is_expected.to be_invalid }
-
-      context 'after validation' do
-        let(:error) { timetable_sample.errors.messages[:timetable].first }
-
-        before { timetable_sample.valid? }
-
-        it { expect(error).to include 'schedule_is_not_open' }
-      end
-    end
-
     context 'when schedule is open' do
       before { Timecop.freeze(Time.zone.parse('2015-08-04 15:00')) }
       after { Timecop.return }
