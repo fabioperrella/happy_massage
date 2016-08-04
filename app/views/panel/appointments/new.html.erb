@@ -23,11 +23,11 @@
         <% massage_date[:periods].each do |massage_period| %>
           <% massage_period[:schedule].each do |massage_slot| %>
             <tr>
-              <td><%= radio_button_tag(:timetable, massage_slot[:time]) %></td>
               <td><%= massage_date[:date] %></td>
               <td><%= massage_period[:period] %></td>
               <td><%= "#{l(massage_slot[:time], format: :short)}" %></td>
               <td><%= massage_slot[:remaining_massages] %></td>
+              <td><%= radio_button_tag(:timetable, massage_slot[:time]) %></td>
             </tr>
           <% end %>
         <% end %>
