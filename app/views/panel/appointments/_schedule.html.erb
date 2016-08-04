@@ -1,0 +1,71 @@
+<ul class="ls-tabs-nav">
+  <% @available_timetables.each do |massage_date| %>
+    <li><a data-ls-module="tabs" href="#day-<%= massage_date[:date].gsub("/", "") %>">Dia | <%= massage_date[:date] %></a></li>
+  <% end %>
+</ul>
+
+<div class="ls-tabs-container">
+  <% @available_timetables.each do |massage_date| %>
+    <div id="day-<%= massage_date[:date].gsub("/", "") %>" class="ls-tab-content">
+
+      <% massage_date[:periods].each do |massage_period| %>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="hm-schedule--period ls-txt-center">
+            <% if massage_period[:period] == "morning" %>
+              <h1>Manhã</h1>
+            <% else %>
+              <h1>Tarde</h1>
+            <% end %>
+          </div>
+        <div class="ls-list">
+          <header class="ls-list-header hm-list">
+            <% massage_period[:schedule].each do |massage_slot| %>
+              <div class="ls-list-title col-md-4">
+                <h2><%= "#{l(massage_slot[:time], format: :short)}" %></h2>
+              </div>
+              <div class="ls-txt-right hm-schedule--btn">
+                <a href="#" class="ls-btn-primary ls-btn-right">Agendar</a>
+              </div>
+            <% end %>
+          </header>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<!--
+<%= form_for(@massage, url: panel_appointments_path, html: { method: 'create' }) do |f| %>
+
+
+  <table class="ls-table ls-table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Dia</th>
+        <th>Período</th>
+        <th><%= t('.massage_date_and_hour') %></th>
+        <th><%= t('.available_appointments') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @available_timetables.each do |massage_date| %>
+        <% massage_date[:periods].each do |massage_period| %>
+          <% massage_period[:schedule].each do |massage_slot| %>
+            <tr>
+              <td><%= massage_date[:date] %></td>
+              <td><%= massage_period[:period] %></td>
+              <td><%= "#{l(massage_slot[:time], format: :short)}" %></td>
+              <td><%= massage_slot[:remaining_massages] %></td>
+              <td><%= radio_button_tag(:timetable, massage_slot[:time]) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="ls-actions-btn">
+    <%= f.submit t('.schedule_massage'), class: "ls-btn" %>
+  </div>
+<% end %> -->
