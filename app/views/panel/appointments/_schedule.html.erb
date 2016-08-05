@@ -20,10 +20,13 @@
         <div class="ls-list">
           <header class="ls-list-header hm-list">
             <% massage_period[:schedule].each do |massage_slot| %>
-              <div class="ls-list-title col-md-4">
+              <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 ls-txt-center">
                 <h2><%= "#{l(massage_slot[:time], format: :short)}" %></h2>
               </div>
-              <div class="ls-txt-right hm-schedule--btn">
+              <div class="col-lg-6 col-md-4 col-sm-4 col-xs-2 ls-txt-center">
+                <h3><%= massage_slot[:remaining_massages] %></h3>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 ls-txt-center hm-schedule--btn">
                 <a href="#" class="ls-btn-primary ls-btn-right">Agendar</a>
               </div>
             <% end %>
@@ -35,8 +38,8 @@
   <% end %>
 </div>
 
-<!--
-<%= form_for(@massage, url: panel_appointments_path, html: { method: 'create' }) do |f| %>
+
+<!-- <%= form_for(@massage, url: panel_appointments_path, html: { method: 'create' }) do |f| %>
 
 
   <table class="ls-table ls-table-striped">
