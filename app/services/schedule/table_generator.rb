@@ -4,7 +4,7 @@ module Schedule
       massage_dates = massage_dates(start_time, end_time)
       massage_dates.map { |d| massage_schedules(d.year, d.month, d.day) - pauses(d.year, d.month, d.day) }
            .flatten
-           .select { |d| (d > start_time) & (d < end_time) }
+           .select { |d| (d >= start_time) & (d < end_time) }
     end
 
     private

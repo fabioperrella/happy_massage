@@ -85,21 +85,6 @@ describe Schedule::MassageScheduler do
       it { expect(timetable_error_message).to include(error_message) }
     end
 
-    context 'when massage scheduling is closed' do
-      let(:error_message) { 'O agendamento de massagens está fechado.' }
-
-      before do
-        Timecop.freeze('2015-08-10 14:00')
-
-        schedule_massage
-      end
-
-      after { Timecop.return }
-
-      it { is_expected.to be_invalid }
-      it { expect(timetable_error_message).to include(error_message) }
-    end
-
     context 'when massage scheduling is open' do
       context 'but timetable is invalid' do
         let(:timetable) { Time.zone.parse('2015-08-12 9:01') }

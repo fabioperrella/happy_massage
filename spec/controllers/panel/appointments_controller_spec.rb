@@ -14,7 +14,10 @@ describe Panel::AppointmentsController do
   end
 
   describe 'GET #index' do
-    before { get :index }
+    before {
+      create(:masseur) 
+      get :index 
+    }
 
     it { expect(response).to have_http_status(:success) }
     it { expect(response).to render_template(:index) }
@@ -65,53 +68,21 @@ describe Panel::AppointmentsController do
   end
 
   describe 'GET #new' do
-    let(:available_timetables) do
-      Schedule::TimetablesPresenter.new.available_timetables
+    let(:available_schedule) do
+      Schedule::TimetablesPresenter.new.available_schedule(Time.zone.parse('2015-08-07 15:00'))
     end
 
-    context 'when date does not have massage scheduling' do
-      before do
-        Timecop.freeze(Time.zone.parse('2015-08-05 14:00'))
-        get(:new)
-      end
-
-      after { Timecop.return }
-
-      it { expect(response).to have_http_status(:success) }
-      it { expect(response).to render_template(:new) }
-      it { expect(assigns(:massage_date)).to be_nil }
-      it { expect(assigns(:available_timetables)).to be_nil }
+    before do
+      Timecop.freeze(Time.zone.parse('2015-08-07 15:00'))
+      create(:masseur) 
+      get(:new)
     end
 
-    context 'when date has massage scheduling' do
-      context 'but schedule is not open' do
-        before do
-          Timecop.freeze(Time.zone.parse('2015-08-06 14:29'))
-          get(:new)
-        end
+    after { Timecop.return }
 
-        after { Timecop.return }
-
-        it { expect(response).to have_http_status(:success) }
-        it { expect(response).to render_template(:new) }
-        it { expect(assigns(:massage_date)).to be_nil }
-        it { expect(assigns(:available_timetables)).to be_nil }
-      end
-
-      context 'and schedule is open' do
-        before do
-          Timecop.freeze(Time.zone.parse('2015-08-06 15:00'))
-          get(:new)
-        end
-
-        after { Timecop.return }
-
-        it { expect(response).to have_http_status(:success) }
-        it { expect(response).to render_template(:new) }
-        it { expect(assigns(:massage_date)).to eq(Date.parse('2015-08-07')) }
-        it { expect(assigns(:available_timetables)).to eq available_timetables }
-      end
-    end
+    it { expect(response).to have_http_status(:success) }
+    it { expect(response).to render_template(:new) }
+    it { expect(assigns(:available_timetables)).to eq available_schedule }
   end
 
   describe 'DELETE #destroy' do
@@ -169,9 +140,8 @@ describe Panel::AppointmentsController do
     end
   end
 
-  describe 'GET #open_schedule' do
+  describe 'GET #schedule' do
     before do
-      get(:open_schedule)
     end
   end
 end

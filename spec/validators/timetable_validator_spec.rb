@@ -27,14 +27,6 @@ describe TimetableValidator do
           let(:timetable) { Time.zone.parse(timetable) + 1.day }
 
           it { is_expected.to be_invalid }
-
-          context 'after validation' do
-            let(:error) { timetable_sample.errors.messages[:timetable].first }
-
-            before { timetable_sample.valid? }
-
-            it { expect(error).to include 'timetable_is_out_of_range' }
-          end
         end
       end
 
