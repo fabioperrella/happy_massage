@@ -16,8 +16,8 @@ describe ApplicationHelper do
       context "when #{alert} can be dismissed" do
         let(:result) do
           "<div class=\"ls-dismissable #{css_class}\">" \
-            "<span class=\"ls-dismiss\" data-ls-module=\"dismiss\" " \
-            "aria-hidden=\"true\">x</span> teste" \
+            '<span class="ls-dismiss" data-ls-module="dismiss" ' \
+            'aria-hidden="true">x</span> teste' \
           '</div>'.html_safe
         end
 

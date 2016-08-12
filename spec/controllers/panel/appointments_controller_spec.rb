@@ -14,10 +14,10 @@ describe Panel::AppointmentsController do
   end
 
   describe 'GET #index' do
-    before {
-      create(:masseur) 
-      get :index 
-    }
+    before do
+      create(:masseur)
+      get :index
+    end
 
     it { expect(response).to have_http_status(:success) }
     it { expect(response).to render_template(:index) }
@@ -74,7 +74,7 @@ describe Panel::AppointmentsController do
 
     before do
       Timecop.freeze(Time.zone.parse('2015-08-07 15:00'))
-      create(:masseur) 
+      create(:masseur)
       get(:new)
     end
 

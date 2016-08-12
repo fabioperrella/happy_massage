@@ -26,10 +26,10 @@ describe Admin::ScheduleController do
     end
 
     context 'and there is at least one masseur' do
-      before { 
+      before do
         create(:masseur)
-        get(:index, date: '2015-01-02') 
-      }
+        get(:index, date: '2015-01-02')
+      end
 
       it { expect(response).to have_http_status(:success) }
       it { is_expected.to render_template(layout: 'admin') }

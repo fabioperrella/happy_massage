@@ -6,10 +6,10 @@ module Admin
       end
 
       def formatted_date
-        has_valid_date? ? I18n.l(date_parser.parsed_date) : ''
+        valid_date? ? I18n.l(date_parser.parsed_date) : ''
       end
 
-      def has_valid_date?
+      def valid_date?
         date_parser.valid_date?
       end
 

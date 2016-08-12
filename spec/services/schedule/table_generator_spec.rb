@@ -1,6 +1,5 @@
 describe Schedule::TableGenerator do
   describe '#schedule_table' do
-
     subject(:schedule_table) do
       described_class.new.schedule_table(Time.zone.parse('2016-08-12 1:00'), Time.zone.parse('2016-08-12 23:00'))
     end

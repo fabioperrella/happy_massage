@@ -20,13 +20,13 @@ module Schedule
 
         available_timetables << [timetable, massages_left]
       end
-      
+
       available_timetables
     end
 
     def group_by_period(day_schedule)
       day_schedule.group_by { |t| t[0].hour / 12 }
-                  .map { |g| { period: ['morning', 'afternoon'][g[0]], schedule: build_period_schedule(g[1]) } }
+                  .map { |g| { period: %w(morning afternoon)[g[0]], schedule: build_period_schedule(g[1]) } }
     end
 
     def build_period_schedule(period_schedule)

@@ -7,7 +7,7 @@ class TimetableValidator < ActiveModel::EachValidator
 
   def validate_schedule_table_contains_timetable(record, attribute, value)
     return if record.errors[attribute].any?
-    return if value.present? and schedule_table(value).include?(value)
+    return if value.present? && schedule_table(value).include?(value)
     record.errors.add(attribute, :timetable_is_out_of_range)
   end
 

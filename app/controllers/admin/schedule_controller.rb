@@ -18,7 +18,7 @@ module Admin
 
     def validate_date
       @date_presenter = Appointments::DatePresenter.new(params[:date])
-      return if @date_presenter.has_valid_date?
+      return if @date_presenter.valid_date?
 
       flash.now[:alert] = t('.select_valid_date') if params[:date]
       render

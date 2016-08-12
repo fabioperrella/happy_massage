@@ -3,8 +3,8 @@ module Schedule
     def schedule_table(start_time, end_time)
       massage_dates = massage_dates(start_time, end_time)
       massage_dates.map { |d| massage_schedules(d.year, d.month, d.day) - pauses(d.year, d.month, d.day) }
-           .flatten
-           .select { |d| (d >= start_time) & (d < end_time) }
+                   .flatten
+                   .select { |d| (d >= start_time) & (d < end_time) }
     end
 
     private
@@ -30,7 +30,7 @@ module Schedule
       initial_hour, initial_minutes = ScheduleSettings.massage_start.split(':')
       initial = Time.zone.local(year, month, day, initial_hour, initial_minutes)
 
-      massage_schedules = massages.times.each_with_object([initial]) do |_, acc|
+      massages.times.each_with_object([initial]) do |_, acc|
         acc << acc.last + ScheduleSettings.massage_duration
       end
     end

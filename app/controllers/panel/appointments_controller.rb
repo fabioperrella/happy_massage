@@ -34,7 +34,7 @@ module Panel
     end
 
     def schedule
-      render :json => Schedule::TimetablesPresenter.new.available_schedule(Time.now)
+      render json: Schedule::TimetablesPresenter.new.available_schedule(Time.now)
     end
 
     private
