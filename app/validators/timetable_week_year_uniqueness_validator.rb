@@ -27,18 +27,15 @@ class TimetableWeekYearUniquenessValidator < ActiveModel::EachValidator
   end
 
   def user_total_scheduled_massages(user)
-    user
-      .massages
-      .where('status = ?', 'scheduled').count
+    user.massages.where('status = ?', 'scheduled').count
   end
 
   def user_massages_for_same_week(user, timetable)
-    user
-      .massages
-      .where(
-        'date >= ? and date <= ?',
-        timetable.beginning_of_week,
-        timetable.end_of_week
-      ).count
+    user.massages
+        .where(
+          'date >= ? and date <= ?',
+          timetable.beginning_of_week,
+          timetable.end_of_week
+        ).count
   end
 end
