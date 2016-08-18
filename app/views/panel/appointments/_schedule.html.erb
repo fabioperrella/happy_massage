@@ -1,12 +1,14 @@
 <ul class="ls-tabs-nav">
-  <% @available_timetables.each do |massage_date| %>
-    <li><a data-ls-module="tabs" href="#day-<%= massage_date[:date].to_s %>"> <%= l(massage_date[:date], format: '%A | %d/%m/%Y') %></a></li>
+  <% @available_timetables.each.with_index do |massage_date, index| %>
+    <li class="<%= if(index == 0) then 'ls-active' end %>">
+      <a data-ls-module="tabs" href="#day-<%= massage_date[:date].to_s %>"> <%= l(massage_date[:date], format: '%A | %d/%m/%Y') %></a>
+    </li>
   <% end %>
 </ul>
 
 <div class="ls-tabs-container">
-  <% @available_timetables.each do |massage_date| %>
-    <div id="day-<%= massage_date[:date].to_s %>" class="ls-tab-content" >
+  <% @available_timetables.each.with_index do |massage_date, index| %>
+    <div id="day-<%= massage_date[:date].to_s %>" class="ls-tab-content <%= if(index == 0) then 'ls-active' end %>" >
 
       <% massage_date[:periods].each do |massage_period| %>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

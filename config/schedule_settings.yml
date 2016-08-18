@@ -4,7 +4,7 @@ development: &default
   massage_end: '18:00'
   location: Sala Quick Massage
   pauses: [['10:30', '10:45'], ['12:00', '13:00'], ['16:30', '16:45']]
-  scheduling_window_days: 5
+  scheduling_window_days: 7
   scheduled_limit_per_week: 1
   scheduled_limit_total: 2
   massage_days: [ Monday, Wednesday, Friday ]

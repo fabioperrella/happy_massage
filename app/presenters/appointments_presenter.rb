@@ -5,22 +5,20 @@ class AppointmentsPresenter
 
   def recent_appointments
     @recent_appointments ||= \
-      user_massages
+      user
+      .massages
       .scheduled_massages
       .where('timetable > ?', interval_to_be_considered_recent)
+      .order(:timetable)
   end
 
   def past_appointments
-    @past_appointments ||= user_massages.past_massages
+    user.massages.past_massages.order(timetable: :desc)
   end
 
   private
 
   attr_reader :user
-
-  def user_massages
-    @user_massages ||= user.massages.order(timetable: :desc)
-  end
 
   def interval_to_be_considered_recent
     Time.zone.now - ScheduleSettings.massage_duration
