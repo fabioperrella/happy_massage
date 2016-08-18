@@ -53,7 +53,8 @@ module Schedule
     end
 
     def build_end_time(request_time)
-      request_time.at_beginning_of_day + (ScheduleSettings.scheduling_window_days - 1).day
+      delta_days = (ScheduleSettings.scheduling_window_days - 1).day
+      request_time.at_end_of_day + delta_days
     end
   end
 end
