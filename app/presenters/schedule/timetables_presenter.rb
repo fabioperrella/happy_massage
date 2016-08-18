@@ -26,18 +26,18 @@ module Schedule
 
     def group_by_period(day_schedule)
       day_schedule.group_by { |t| t[0].hour / 12 }
-                  .map      { |g| { period: %w(morning afternoon)[g[0]], 
+                  .map      { |g| { period: %w(morning afternoon)[g[0]],
                                     schedule: build_period_schedule(g[1]) } }
     end
 
     def build_period_schedule(period_schedule)
-      period_schedule.map { |t| { time: t[0], 
+      period_schedule.map { |t| { time: t[0],
                                   remaining_massages: t[1] } }
     end
 
     def scheduled_massages(start_time, end_time)
       @schedule_massages ||= begin
-        query = Massage.where('date(timetable) >= ? and date(timetable) < ?', start_time, end_time)
+        query = Massage.where('date(timetable) >= ? and date(timetable) <= ?', start_time, end_time)
                        .group(:timetable).count(:id)
         Hash[query.map { |key, value| [key.in_time_zone, value] }]
       end
