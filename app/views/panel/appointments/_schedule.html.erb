@@ -1,0 +1,43 @@
+<ul class="ls-tabs-nav">
+  <% @available_timetables.each do |massage_date| %>
+    <li><a data-ls-module="tabs" href="#day-<%= massage_date[:date].to_s %>"> <%= l(massage_date[:date], format: '%A | %d/%m/%Y') %></a></li>
+  <% end %>
+</ul>
+
+<div class="ls-tabs-container">
+  <% @available_timetables.each do |massage_date| %>
+    <div id="day-<%= massage_date[:date].to_s %>" class="ls-tab-content" >
+
+      <% massage_date[:periods].each do |massage_period| %>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="hm-schedule--period ls-txt-center">
+            <h1><%= t(".#{massage_period[:period]}") %></h1>
+          </div>
+          <table class="ls-table ls-no-hover ls-table-striped">
+            <thead>
+              <tr>
+                <td><%= t('panel.appointments.schedule.timetable') %></td>
+                <td class="ls-txt-center"><%= t('.available') %></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              <% massage_period[:schedule].each do |massage_slot| %>
+                <tr>
+                  <td><h2><%= "#{l(massage_slot[:time], format: :short)}" %></h2></td>
+                  <td class="ls-txt-center" ><h3><%= massage_slot[:remaining_massages] %></h3></td>
+                  <td class="ls-txt-right">
+                    <%= form_for(@massage, url: panel_appointments_path, html: { method: 'create' }) do |f| %>
+                      <input type="hidden" name="timetable" value="<%= massage_slot[:time] %>">
+                      <%= f.submit t('.schedule_timetable'), class: "ls-btn-primary ls-btn-right" %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

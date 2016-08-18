@@ -7,34 +7,4 @@
 
 <hr>
 
-<%= form_for(@massage, url: panel_appointments_path, html: { method: 'create' }) do |f| %>
-  <table class="ls-table ls-table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Dia</th>
-        <th>Período</th>
-        <th><%= t('.massage_date_and_hour') %></th>
-        <th><%= t('.available_appointments') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @available_timetables.each do |massage_date| %>
-        <% massage_date[:periods].each do |massage_period| %>
-          <% massage_period[:schedule].each do |massage_slot| %>
-            <tr>
-              <td><%= radio_button_tag(:timetable, massage_slot[:time]) %></td>
-              <td><%= massage_date[:date] %></td>
-              <td><%= massage_period[:period] %></td>
-              <td><%= "#{l(massage_slot[:time], format: :short)}" %></td>
-              <td><%= massage_slot[:remaining_massages] %></td>
-            </tr>
-          <% end %>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="ls-actions-btn">
-    <%= f.submit t('.schedule_massage'), class: "ls-btn" %>
-  </div>
-<% end %>
+<%= render 'schedule'%>
