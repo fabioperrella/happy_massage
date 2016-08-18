@@ -37,7 +37,7 @@ module Schedule
 
     def scheduled_massages(start_time, end_time)
       @schedule_massages ||= begin
-        query = Massage.where('date(timetable) >= ? and date(timetable) < ?', start_time, end_time)
+        query = Massage.where('date(timetable) >= ? and date(timetable) <= ?', start_time, end_time)
                        .group(:timetable).count(:id)
         Hash[query.map { |key, value| [key.in_time_zone, value] }]
       end
