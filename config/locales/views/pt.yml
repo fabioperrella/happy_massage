@@ -65,6 +65,12 @@ pt:
         schedule_massage: Agendar massagem
         available_appointments: Vagas disponíveis
         massage_date_and_hour: Hora
+      schedule:
+        morning: Manhã
+        afternoon: Tarde
+        timetable: Horário
+        available: Disponíveis
+        schedule_timetable: Agendar
       destroy:
         cancelled: Agendamento excluído com sucesso!
         cannot_cancel: O agendamento deve ser cancelado com até 30 minutos de antecedência.
