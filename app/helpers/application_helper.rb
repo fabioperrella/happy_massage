@@ -5,7 +5,7 @@ module ApplicationHelper
     'alert_without_dismiss' => 'ls-alert-danger',
     'notice'                => 'ls-alert-success',
     'info'                  => 'ls-alert-info'
-  }
+  }.freeze
 
   def flash_message
     content = ''

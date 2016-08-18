@@ -1,22 +1,26 @@
 module Schedule
   class TableGenerator
-    def initialize(massage_date)
-      @massage_date = massage_date
-    end
-
-    def schedule_table
-      @schedule_table ||= begin
-        year = @massage_date.year
-        month = @massage_date.month
-        day = @massage_date.day
-        massage_schedules(year, month, day) - pauses(year, month, day)
-      end
+    def schedule_table(start_time, end_time)
+      massage_dates = massage_dates(start_time, end_time)
+      massage_dates.map { |d| massage_schedules(d.year, d.month, d.day) - pauses(d.year, d.month, d.day) }
+                   .flatten
+                   .select { |d| (d >= start_time) & (d < end_time) }
     end
 
     private
 
-    def time_for(time_expression)
-      Time.zone.parse(ScheduleSettings.send(time_expression))
+    def massage_dates(start_time, end_time)
+      dates_range(start_time, end_time).select { |d| configured_massage_days.include? d.strftime('%A') }
+    end
+
+    def dates_range(start_time, end_time)
+      start_day = start_time.to_date
+      end_day = end_time.to_date
+      (start_day..end_day)
+    end
+
+    def configured_massage_days
+      ScheduleSettings.massage_days
     end
 
     def massage_schedules(year, month, day)
@@ -26,9 +30,13 @@ module Schedule
       initial_hour, initial_minutes = ScheduleSettings.massage_start.split(':')
       initial = Time.zone.local(year, month, day, initial_hour, initial_minutes)
 
-      massage_schedules = massages.times.each_with_object([initial]) do |_, acc|
+      massages.times.each_with_object([initial]) do |_, acc|
         acc << acc.last + ScheduleSettings.massage_duration
       end
+    end
+
+    def time_for(time_expression)
+      Time.zone.parse(ScheduleSettings.send(time_expression))
     end
 
     def pauses(year, month, day)
@@ -45,11 +53,6 @@ module Schedule
         end
       end
       pauses
-    end
-
-    # Refactor methods above using this
-    def generate_timetables(_first, _last, interval)
-      (initial.to_i..final.to_i).step(interval).map { |t| Time.zone.at(t) }
     end
   end
 end

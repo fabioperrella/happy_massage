@@ -23,18 +23,37 @@ describe TimetableWeekYearUniquenessValidator do
     context 'when user has not scheduled in this week during this year' do
       before do
         allow_any_instance_of(described_class)
-          .to receive(:user_has_not_scheduled_this_week_in_this_year?)
-          .and_return(true)
+          .to receive(:user_has_scheduled_this_week?)
+          .and_return(false)
+        allow_any_instance_of(described_class)
+          .to receive(:user_has_scheduled_too_many_massages?)
+          .and_return(false)
       end
 
       it { is_expected.to be_valid }
     end
 
-    context 'when user has not scheduled in this week during this year' do
+    context 'when user has scheduled in this week during this year' do
       before do
         allow_any_instance_of(described_class)
-          .to receive(:user_has_not_scheduled_this_week_in_this_year?)
+          .to receive(:user_has_scheduled_this_week?)
+          .and_return(true)
+        allow_any_instance_of(described_class)
+          .to receive(:user_has_scheduled_too_many_massages?)
           .and_return(false)
+      end
+
+      it { is_expected.to be_invalid }
+    end
+
+    context 'when user has scheduled too many massages at same time' do
+      before do
+        allow_any_instance_of(described_class)
+          .to receive(:user_has_scheduled_this_week?)
+          .and_return(false)
+        allow_any_instance_of(described_class)
+          .to receive(:user_has_scheduled_too_many_massages?)
+          .and_return(true)
       end
 
       it { is_expected.to be_invalid }

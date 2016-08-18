@@ -17,43 +17,7 @@ describe Massage do
       end
 
       context 'when user has not schedule yet during a week' do
-        context 'when a day of the week does not have scheduling' do
-          let(:timetable) { '2015-08-03' }
-
-          before { Timecop.travel('2015-08-03 14:29') }
-          after { Timecop.return }
-
-          it { is_expected.to be_invalid }
-
-          context 'after validation' do
-            before { massage.valid? }
-
-            it 'adds an error message to timetable field' do
-              expect(massage.errors.messages[:timetable].first)
-                .to include 'O agendamento de massagens está fechado.'
-            end
-          end
-        end
-
         context 'when a day of the week does have scheduling' do
-          context 'but it is not open yet' do
-            let(:timetable) { '2015-08-04' }
-
-            before { Timecop.travel('2015-08-04 14:29') }
-            after { Timecop.return }
-
-            it { is_expected.to be_invalid }
-
-            context 'after validation' do
-              before { massage.valid? }
-
-              it 'adds an error message to timetable field' do
-                expect(massage.errors.messages[:timetable].first)
-                  .to include 'O agendamento de massagens está fechado.'
-              end
-            end
-          end
-
           [nil, '9:01'].each do |timetable|
             context 'and it is open but timetable is out of range or is blank' do
               let(:timetable) { timetable }
@@ -97,8 +61,7 @@ describe Massage do
         context 'after validation' do
           before { massage.valid? }
           let(:result) do
-            'Você já realizou o agendamento semanal permitido. ' \
-            'Por favor, tente novamente na semana que vem.'
+            'Você ultrapassou o limite de massagens agendadas semanais. Por favor, tente novamente na semana que vem.'
           end
 
           it 'adds an error message to timetable field' do

@@ -17,8 +17,8 @@ describe Admin::Appointments::DatePresenter do
     end
   end
 
-  describe '#has_valid_date?' do
-    subject(:formatted_date) { described_class.new(date).has_valid_date? }
+  describe '#valid_date?' do
+    subject(:formatted_date) { described_class.new(date).valid_date? }
 
     context 'when date has a valid format' do
       let(:date) { '01/01/2015' }

@@ -43,7 +43,7 @@ pt:
     appointments:
       index:
         my_appointments: Meus agendamentos
-        next_massage: Próxima massagem
+        next_massage: Próximas massagens
         no_appointments_scheduled: Você não possui nenhum agendamento recente.
         no_appointments_historical_yet: Você ainda não tem nenhum agendamento em seu histórico.
         appointments_historical: Histórico de agendamentos
@@ -65,6 +65,12 @@ pt:
         schedule_massage: Agendar massagem
         available_appointments: Vagas disponíveis
         massage_date_and_hour: Hora
+      schedule:
+        morning: Manhã
+        afternoon: Tarde
+        timetable: Horário
+        available: Disponíveis
+        schedule_timetable: Agendar
       destroy:
         cancelled: Agendamento excluído com sucesso!
         cannot_cancel: O agendamento deve ser cancelado com até 30 minutos de antecedência.

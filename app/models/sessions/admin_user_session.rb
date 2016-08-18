@@ -1,7 +1,7 @@
 module Sessions
   class AdminUserSession < BaseSession
-    ADMIN_N2 = 'HAPPY_MASSAGE_ADMIN-N2'
-    ADMIN_N3 = 'HAPPY_MASSAGE_ADMIN-N3'
+    ADMIN_N2 = 'HAPPY_MASSAGE_ADMIN-N2'.freeze
+    ADMIN_N3 = 'HAPPY_MASSAGE_ADMIN-N3'.freeze
 
     def admin?
       admin_n2? || admin_n3?

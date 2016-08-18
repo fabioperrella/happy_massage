@@ -16,37 +16,27 @@ describe Admin::ScheduleController do
   describe 'GET #index' do
     before { request.env['HTTP_REFERER'] = admin_schedule_index_path }
 
-    context 'when date is invalid' do
-      before { get(:index) }
+    context 'and there are no masseurs' do
+      before { get(:index, date: '2015-01-01') }
 
       it { expect(response).to have_http_status(:success) }
       it { is_expected.to render_template(layout: 'admin') }
       it { is_expected.to render_template(:index) }
-      it { expect(assigns(:appointments)).to be_nil }
+      it { expect(assigns(:appointments)).to be_empty }
     end
 
-    context 'when date is valid' do
-      context 'and there are no masseurs' do
-        before { get(:index, date: '2015-01-01') }
-
-        it { expect(response).to have_http_status(:success) }
-        it { is_expected.to render_template(layout: 'admin') }
-        it { is_expected.to render_template(:index) }
-        it { expect(assigns(:appointments)).to be_empty }
+    context 'and there is at least one masseur' do
+      before do
+        create(:masseur)
+        get(:index, date: '2015-01-02')
       end
 
-      context 'and there is at least one masseur' do
-        let!(:masseur) { create(:masseur) }
+      it { expect(response).to have_http_status(:success) }
+      it { is_expected.to render_template(layout: 'admin') }
+      it { is_expected.to render_template(:index) }
 
-        before { get(:index, date: '2015-01-01') }
-
-        it { expect(response).to have_http_status(:success) }
-        it { is_expected.to render_template(layout: 'admin') }
-        it { is_expected.to render_template(:index) }
-
-        it 'assigns @appointments a non empty array' do
-          expect(assigns(:appointments)).not_to be_empty
-        end
+      it 'assigns @appointments a non empty array' do
+        expect(assigns(:appointments)).not_to be_empty
       end
     end
   end
