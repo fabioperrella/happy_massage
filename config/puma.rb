@@ -1,6 +1,8 @@
 environment ENV.fetch('RAILS_ENV', 'development')
 
-daemonize true
+unless Rails.env.development?
+  daemonize true
+end
 
 pidfile 'tmp/pids/puma.pid'
 state_path 'tmp/pids/puma.state'
