@@ -2,6 +2,7 @@ describe Masseur do
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :email }
+    # it { should validate_uniqueness_of(:email) }  # shoulda-matchers has a bug https://github.com/thoughtbot/shoulda-matchers/issues/880
   end
 
   describe '#new' do

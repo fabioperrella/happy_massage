@@ -5,9 +5,17 @@ This is a Rails App intended to be an appointments book.
 ## Setup
 
 ```shell
+cp .env.example .env
 bundle
 bundle exec rake db:migrate
 bundle exec rake db:seed
+```
+
+## Tests
+
+```
+cp .env.test.example .env.test
+bundle exec rspec
 ```
 
 ## Usage

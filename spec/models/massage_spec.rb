@@ -5,8 +5,6 @@ describe Massage do
       it { is_expected.to validate_presence_of(:user_id) }
     end
 
-    it { is_expected.to validate_uniqueness_of(:email) }
-
     context 'timetable validations' do
       let(:masseur) { create(:masseur) }
       let(:user) { create(:user) }
