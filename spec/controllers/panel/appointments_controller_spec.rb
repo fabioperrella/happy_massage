@@ -40,6 +40,8 @@ describe Panel::AppointmentsController do
 
       request.env['HTTP_REFERER'] = root_path
 
+      allow(UserMailer).to receive(:notify_massage).and_return(double('mailer').as_null_object)
+
       post(:create, params)
     end
 
@@ -51,6 +53,7 @@ describe Panel::AppointmentsController do
       it { expect(Massage.last).to_not be_nil }
       it { is_expected.to redirect_to root_path }
       it { expect(flash[:notice]).to eq(successful_creation_message) }
+      it { expect(UserMailer).to have_received(:notify_massage) }
     end
 
     context 'when massage does not persist' do
@@ -64,6 +67,7 @@ describe Panel::AppointmentsController do
       it { expect(Massage.last).to be_nil }
       it { is_expected.to redirect_to root_path }
       it { expect(flash[:alert]).to eq(error_message) }
+      it { expect(UserMailer).to_not have_received(:notify_massage) }
     end
   end
 

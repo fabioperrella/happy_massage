@@ -26,5 +26,16 @@ module HappyMassage
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths << Rails.root.join('app', 'validators')
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        address: ENV['SMTP_HOST'],
+        port: ENV['SMTP_PORT'],
+        user_name: ENV['SMTP_USER'],
+        password: ENV['SMTP_PASSWORD'],
+        authentication: :login,
+        domain: ENV['SMTP_DOMAIN'],
+        enable_starttls_auto: false
+    }
   end
 end
