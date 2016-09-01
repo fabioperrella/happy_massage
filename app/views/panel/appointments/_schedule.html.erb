@@ -1,6 +1,6 @@
 <ul class="ls-tabs-nav">
   <% @available_timetables.each.with_index do |massage_date, index| %>
-    <li class=" <%= if(index == 0) then 'ls-active' end %> hm-tabs">
+    <li class="<%= if(index == 0) then 'ls-active' end %>">
       <a data-ls-module="tabs" href="#day-<%= massage_date[:date].to_s %>"> <%= l(massage_date[:date], format: '%A | %d/%m/%Y') %></a>
     </li>
   <% end %>
