@@ -7,7 +7,7 @@ module Panel
     def create
       @massage = schedule_massage
       if @massage.persisted?
-        UserMailer.notify_massage(@massage.id).deliver_later
+        UserMailer.notify_massage(massage_id: @massage.id).deliver_later
         flash[:notice] = t('.massage_has_been_scheduled')
         redirect_to root_path
       else

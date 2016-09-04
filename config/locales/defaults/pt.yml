@@ -207,3 +207,8 @@ pt:
       short: "%H:%M"
       day_of_the_week: "%A"
     pm: ''
+  massage: Massagem
+  mailers:
+    user_mailer:
+      notify_massage:
+          subject: Massagem agendada
