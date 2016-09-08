@@ -2,8 +2,13 @@ module Schedule
   class TimetablesPresenter
     def available_schedule(request_time)
       schedule = available_timetables(request_time)
+
+      unavailable_days = UnavailableDay.all.map(&:date)
+
       schedule.group_by { |t| t[0].to_date }
-              .map      { |g| { date: g[0], periods: group_by_period(g[1]) } }
+              .map      { |g| { date: g[0], 
+                                availability: unavailable_days.exclude?(g[0]), 
+                                periods: group_by_period(g[1]) } }
     end
 
     private

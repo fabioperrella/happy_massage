@@ -1,0 +1,15 @@
+<div class="ls-box">
+  <%= form_tag(admin_unavailable_days_path, method: :post, class: 'ls-form ls-form-inline') do |f| %>
+    <label class="ls-label">
+      <b class="ls-label-text">Data</b>
+      <input type="text" name="date" class="datepicker" placeholder="dd/mm/aaaa">
+    </label>
+    <label class="ls-label">
+      <b class="ls-label-text">Descrição</b>
+      <textarea name="description" rows="1" class="ls-textarea-autoresize"></textarea>
+    </label>
+    <button class="ls-btn ls-btn-primary">Adicionar</button>
+  <% end %>
+</div>
+
+<hr class="ls-clear-both">
