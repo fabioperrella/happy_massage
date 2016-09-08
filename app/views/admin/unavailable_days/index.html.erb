@@ -1,0 +1,16 @@
+<h1 class="ls-title-intro ls-ico-calendar"><%= t('.unavailable_days') %></h1>
+
+<%= flash_message %>
+
+<%= render partial: 'new' %>
+
+<table class="ls-table ls-table-striped">
+  <tr>
+    <th><%= t('.date') %></th>
+    <th><%= t('.description') %></th>
+    <th></th>
+  </tr>
+  <tbody>
+    <%= render @unavailable_days %>
+  </tbody>
+</table>

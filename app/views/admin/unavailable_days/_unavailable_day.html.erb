@@ -1,0 +1,9 @@
+<tr>
+  <td class=""><%= unavailable_day.date %></td>
+  <td class=""><%= unavailable_day.description %></td>
+  <td class="">
+    <%= form_tag(admin_unavailable_day_path(unavailable_day.id), method: :delete, class: 'ls-form ls-form-inline') do %>
+      <%= submit_tag t('.remove'), class: 'ls-btn-danger', data: { confirm: t('.removal_confirmation_message') } %>
+    <% end %>
+  </td>
+</tr>

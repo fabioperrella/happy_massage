@@ -6,6 +6,7 @@ pt:
         logout: Sair
       sidebar:
         scheduled_massages: Massagens agendadas
+        unavailable_days: Dias Indisponíveis
         logout: Sair
     panel:
       topbar:
@@ -39,6 +40,16 @@ pt:
         appointment_not_found: Massagem não encontrada.
       confirm_absence:
         appointment_not_found: Massagem não encontrada.
+    unavailable_days:
+      index:
+        date: Data
+        description: Descrição
+        unavailable_days: Dias Indisponíveis
+      new:
+
+      unavailable_day:
+        remove: Remover
+        removal_confirmation_message: Tem certeza que deseja remover este dia indisponível?
   panel:
     appointments:
       index:
@@ -71,6 +82,7 @@ pt:
         timetable: Horário
         available: Disponíveis
         schedule_timetable: Agendar
+        unavailable_day_message: Não há horários disponíveis para a data escolhida. Por favor, escolha outra opção.
       destroy:
         cancelled: Agendamento excluído com sucesso!
         cannot_cancel: O agendamento deve ser cancelado com até 30 minutos de antecedência.

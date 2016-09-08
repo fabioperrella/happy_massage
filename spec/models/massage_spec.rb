@@ -5,6 +5,10 @@ describe Massage do
       it { is_expected.to validate_presence_of(:user_id) }
     end
 
+    context 'day availability validations' do
+      it 'is pending'
+    end
+
     context 'timetable validations' do
       let(:masseur) { create(:masseur) }
       let(:user) { create(:user) }

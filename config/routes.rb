@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'schedule#index'
 
+    resources :unavailable_days, only: [:index, :create, :destroy]
+
     resources :schedule, only: [:index] do
       member do
         put :confirm_presence
