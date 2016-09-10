@@ -8,11 +8,11 @@ class UserMailer < ActionMailer::Base
     massage = Massage.find massage_id
     event = event_creator.create_event(massage: massage)
 
-    attachments['event.ics'] = { mime_type: 'text/calendar', content: event.to_ical }
-
     mail(
       to: massage.user_email,
-      subject: i18n(:subject)
+      subject: i18n(:subject),
+      content_type: "text/calendar; method=REQUEST",
+      body: event
     )
   end
 
