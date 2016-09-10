@@ -4,24 +4,12 @@ module Schedule
       <<~HEREDOC
         BEGIN:VCALENDAR
         VERSION:2.0
-        PRODID:-//Roundcube libcalendaring 1.1.0//Sabre//Sabre VObject 4.1.0//EN
+        PRODID:-//Locaweb//Massagem//EN
         CALSCALE:GREGORIAN
         METHOD:REQUEST
         BEGIN:VTIMEZONE
         TZID:America/Sao_Paulo
         X-MICROSOFT-CDO-TZID:8
-        BEGIN:DAYLIGHT
-        DTSTART:20151018T030000
-        TZOFFSETFROM:-0300
-        TZOFFSETTO:-0200
-        TZNAME:BRST
-        END:DAYLIGHT
-        BEGIN:DAYLIGHT
-        DTSTART:20161016T030000
-        TZOFFSETFROM:-0300
-        TZOFFSETTO:-0200
-        TZNAME:BRST
-        END:DAYLIGHT
         BEGIN:STANDARD
         DTSTART:20160221T020000
         TZOFFSETFROM:-0200
