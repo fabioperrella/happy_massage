@@ -12,7 +12,7 @@ gem 'aasm'
 gem 'i18n'
 gem 'puma'
 gem 'rubycas-client'
-gem 'icalendar'
+gem 'icalendar', '~> 2.4.1'
 
 group :development, :test do
   gem 'dotenv-rails'

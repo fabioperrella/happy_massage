@@ -19,7 +19,7 @@ class Massage < ActiveRecord::Base
 
   before_validation :retrieve_date_from_timetable
 
-  delegate :email, to: :user, prefix: true
+  delegate :email, :name, to: :user, prefix: true
 
   def cancel!
     destroy! if can_be_cancelled?

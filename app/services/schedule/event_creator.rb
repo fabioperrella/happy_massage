@@ -1,38 +1,44 @@
+require 'icalendar/tzinfo'
+
 module Schedule
   class EventCreator
-    def create_event(massage:, cal: Icalendar::Calendar.new)
-      <<~HEREDOC
-        BEGIN:VCALENDAR
-        VERSION:2.0
-        PRODID:-//Locaweb//Massagem//EN
-        CALSCALE:GREGORIAN
-        METHOD:REQUEST
-        BEGIN:VTIMEZONE
-        TZID:America/Sao_Paulo
-        X-MICROSOFT-CDO-TZID:8
-        BEGIN:STANDARD
-        DTSTART:20160221T020000
-        TZOFFSETFROM:-0200
-        TZOFFSETTO:-0300
-        TZNAME:BRT
-        END:STANDARD
-        END:VTIMEZONE
-        BEGIN:VEVENT
-        UID:F728F9F14A9F5A61702CAB23A6BB8CC9-E2E115F951D0877D
-        DTSTAMP:20160910T222134Z
-        CREATED:20160910T222134Z
-        LAST-MODIFIED:20160910T222134Z
-        DTSTART;TZID=America/Sao_Paulo:20160911T140000
-        DTEND;TZID=America/Sao_Paulo:20160911T143000
-        SUMMARY:lala poppo
-        SEQUENCE:0
-        TRANSP:OPAQUE
-        CLASS:PUBLIC
-        ATTENDEE;PARTSTAT=NEEDS-ACTION;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;RSVP=
-         TRUE:mailto:fabio.perrella@gmail.com
-        END:VEVENT
-        END:VCALENDAR
-      HEREDOC
+    def create_event(massage:)
+      cal = Icalendar::Calendar.new
+      cal.append_custom_property("METHOD", "REQUEST")
+
+      tzid = "America/Sao_Paulo"
+
+      cal.timezone do |t|
+        t.tzid = tzid
+
+        t.standard do |s|
+          s.tzoffsetfrom = "-0200"
+          s.tzoffsetto   = "-0300"
+          s.tzname       = "BRT"
+          s.dtstart      = "20160221T020000"
+        end
+      end
+
+      cal.event do |e|
+        e.dtstart     = Icalendar::Values::DateTime.new massage.timetable, tzid: tzid
+        e.dtend       = Icalendar::Values::DateTime.new massage.timetable + 15.minutes, tzid: tzid
+        e.summary     = "Massagem"
+        e.description = "Massagem"
+        e.ip_class    = "PUBLIC"
+
+        attendee_params = {
+          "CUTYPE"   => "INDIVIDUAL",
+          "ROLE"     => "REQ-PARTICIPANT",
+          "PARTSTAT" => "NEEDS-ACTION",
+          "RSVP"     => "TRUE",
+          "CN"       => massage.user_name,
+          "X-NUM-GUESTS" => 1
+        }
+        attendee_value = Icalendar::Values::CalAddress.new("MAILTO:#{massage.user_email}", attendee_params)
+        e.append_attendee(attendee_value)
+      end
+
+      cal.to_ical
     end
   end
 end
