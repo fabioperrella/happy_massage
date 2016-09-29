@@ -2,14 +2,14 @@ require 'icalendar/tzinfo'
 
 module Schedule
   class EventCreator
+    TZID = "America/Sao_Paulo"
+
     def create_event(massage:)
       cal = Icalendar::Calendar.new
       cal.append_custom_property("METHOD", "REQUEST")
 
-      tzid = "America/Sao_Paulo"
-
       cal.timezone do |t|
-        t.tzid = tzid
+        t.tzid = TZID
 
         t.standard do |s|
           s.tzoffsetfrom = "-0200"
@@ -20,10 +20,10 @@ module Schedule
       end
 
       cal.event do |e|
-        e.dtstart     = Icalendar::Values::DateTime.new massage.timetable, tzid: tzid
-        e.dtend       = Icalendar::Values::DateTime.new massage.timetable + 15.minutes, tzid: tzid
-        e.summary     = "Massagem"
-        e.description = "Massagem"
+        e.dtstart     = Icalendar::Values::DateTime.new massage.timetable, tzid: TZID
+        e.dtend       = Icalendar::Values::DateTime.new massage.timetable + 15.minutes, tzid: TZID
+        e.summary     = t(:summary)
+        e.description = t(:description)
         e.ip_class    = "PUBLIC"
 
         attendee_params = {
@@ -39,6 +39,12 @@ module Schedule
       end
 
       cal.to_ical
+    end
+
+    private
+
+    def t(key)
+      I18n.t("services.event_creator.#{key}")
     end
   end
 end

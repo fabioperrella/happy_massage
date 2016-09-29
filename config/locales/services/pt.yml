@@ -1,0 +1,5 @@
+pt:
+  services:
+    event_creator:
+      summary: Massagem
+      description: Massagem
