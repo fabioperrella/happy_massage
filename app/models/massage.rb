@@ -14,6 +14,8 @@ class Massage < ActiveRecord::Base
     on:                             :create
   )
 
+  validates(:date, day_availability: true)
+
   scope :scheduled_massages, -> { where(status: 'scheduled') }
   scope :past_massages, -> { where.not(status: 'scheduled') }
 
