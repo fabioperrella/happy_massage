@@ -1,8 +1,7 @@
 describe UserMailer do
   describe '.notify_massage' do
     let(:event_content) { 'lalalapoppopo' }
-    let(:event) { double 'event', to_ical: event_content }
-    let(:event_creator) { double 'event_creator', create_event: event }
+    let(:event_creator) { double 'event_creator', create_event: event_content }
     let(:massage) { create :massage }
 
     subject(:notify_massage) do
@@ -17,7 +16,8 @@ describe UserMailer do
     end
 
     it { expect(notify_massage.subject).to include("agendada") }
-    it { expect(notify_massage.attachments['event.ics'].body.to_s).to eq event_content }
+    it { expect(notify_massage.body.to_s).to eq event_content }
+    it { expect(notify_massage.content_type).to eq "text/calendar; charset=UTF-8; method=REQUEST" }
     it { expect(notify_massage.to).to eq [massage.user_email] }
   end
 end
